@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* Exact color tokens mirrored from Flutter AppColors & AppColorsExtension */
+:root {
+  --surface: #F0F4F7;
+  --surface-elevated: #FFFFFF;
+  --surface-variant: #EBF0F5;
+  --text-primary: #13161D;
+  --text-muted: #5A6372;
+  --text-subtle: #8E9AAA;
+  --border-color: #DDE3E9;
+  --divider-color: #E1E8EF;
+
+  --brand-primary: #1DA1F2;
+  --brand-primary-hover: #1991DA;
+  --brand-primary-soft: rgba(29, 161, 242, 0.10);
+
+  --status-success: #00BA7C;
+  --status-success-soft: rgba(0, 186, 124, 0.11);
+  --status-error: #FF4B4B;
+  --status-error-soft: rgba(255, 75, 75, 0.10);
+  --status-warning: #F59E0B;
+  --status-warning-soft: rgba(245, 158, 11, 0.12);
+
+  --type-house: #0EA5E9;
+  --type-business: #D946EF;
+}
+
+[data-theme="dark"] {
+  --surface: #0F1117;
+  --surface-elevated: #232735;
+  --surface-variant: #1A1D27;
+  --text-primary: #E8E8E8;
+  --text-muted: #8B8D97;
+  --text-subtle: #5A5C66;
+  --border-color: #33363F;
+  --divider-color: #2A2D37;
+
+  --brand-primary: #1DA1F2;
+  --brand-primary-hover: #1991DA;
+  --brand-primary-soft: rgba(29, 161, 242, 0.16);
+
+  --status-success: #00BA7C;
+  --status-success-soft: rgba(0, 186, 124, 0.16);
+  --status-error: #FF4B4B;
+  --status-error-soft: rgba(255, 75, 75, 0.15);
+  --status-warning: #F59E0B;
+  --status-warning-soft: rgba(245, 158, 11, 0.16);
+}
+
+@theme {
+  --font-sans: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: var(--surface);
+  --color-paper: var(--surface-elevated);
+  --color-variant: var(--surface-variant);
+  --color-ink: var(--text-primary);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-subtle: var(--text-subtle);
+  --color-hairline: var(--border-color);
+  --color-divider: var(--divider-color);
+
+  --color-accent: var(--brand-primary);
+  --color-accent-hover: var(--brand-primary-hover);
+  --color-accent-soft: var(--brand-primary-soft);
+
+  --color-paid: var(--status-success);
+  --color-paid-soft: var(--status-success-soft);
+  --color-warn: var(--status-warning);
+  --color-warn-soft: var(--status-warning-soft);
+  --color-danger: var(--status-error);
+  --color-danger-soft: var(--status-error-soft);
+
+  --color-house: var(--type-house);
+  --color-business: var(--type-business);
+}
+
+@layer base {
+  html {
+    background-color: var(--surface);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--surface);
+    color: var(--text-primary);
+  }
+
+  ::selection {
+    background-color: #1DA1F2;
+    color: #FFFFFF;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.dark-panel-grid {
+  background-color: #0F1117;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.cloud-grid {
+  background-image:
+    linear-gradient(to right, rgba(19, 22, 29, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(19, 22, 29, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+[data-theme="dark"] .cloud-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+input[type="range"].brand-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: var(--border-color);
+  border-radius: 999px;
+  outline: none;
+}
+
+input[type="range"].brand-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #1DA1F2;
+  border: 3px solid var(--surface-elevated);
+  box-shadow: 0 1px 6px rgba(29, 161, 242, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"].brand-range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"].brand-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #1DA1F2;
+  border: 3px solid var(--surface-elevated);
+  box-shadow: 0 1px 6px rgba(29, 161, 242, 0.4);
+  cursor: pointer;
+}
