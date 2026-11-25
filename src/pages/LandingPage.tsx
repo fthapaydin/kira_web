@@ -1,9 +1,14 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BrandMark } from '../components/BrandMark';
+import { MiniProgressRing } from '../components/MiniProgressRing';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { formatCurrency } from '../lib/formatters';
+
+const PLAY_STORE_URL =
+  'https://play.google.com/store/apps/details?id=com.fatalsoft.kiratakip&hl=tr';
+const CONTACT_EMAIL = 'fatalsoft.inc@gmail.com';
 
 type HeroPreviewTab = 'tenants' | 'summary' | 'history';
 
@@ -448,10 +453,10 @@ export function LandingPage() {
     <div className="min-h-screen bg-canvas text-ink">
       {/* Top Navbar */}
       <header className="sticky top-0 z-30 bg-paper/90 backdrop-blur-md border-b border-hairline">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
           <BrandMark />
 
-          <nav className="hidden md:flex items-center gap-8 text-[14px] font-medium text-ink-muted">
+          <nav className="hidden lg:flex items-center gap-7 text-[14px] font-medium text-ink-muted whitespace-nowrap">
             <a href="#kat-plani" className="hover:text-ink transition-colors">
               Kat & Mülk Planı
             </a>
@@ -466,7 +471,7 @@ export function LandingPage() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             <button
               type="button"
               onClick={toggleTheme}
@@ -477,7 +482,7 @@ export function LandingPage() {
             {isAuthenticated ? (
               <Link
                 to="/panel"
-                className="px-4 py-2 rounded-xl bg-accent text-white text-[13.5px] font-medium hover:bg-accent-hover transition-colors"
+                className="px-3.5 sm:px-4 py-2 rounded-xl bg-accent text-white text-[13px] sm:text-[13.5px] font-medium hover:bg-accent-hover transition-colors whitespace-nowrap"
               >
                 Panele Git →
               </Link>
@@ -485,13 +490,13 @@ export function LandingPage() {
               <>
                 <Link
                   to="/giris"
-                  className="px-3.5 py-2 text-[13.5px] font-medium text-ink-muted hover:text-ink transition-colors"
+                  className="px-2.5 sm:px-3.5 py-2 text-[13px] sm:text-[13.5px] font-medium text-ink-muted hover:text-ink transition-colors whitespace-nowrap"
                 >
                   Giriş Yap
                 </Link>
                 <Link
                   to="/kayit"
-                  className="px-4 py-2 rounded-xl bg-accent text-white text-[13.5px] font-medium hover:bg-accent-hover transition-colors"
+                  className="px-3 sm:px-4 py-2 rounded-xl bg-accent text-white text-[12.5px] sm:text-[13.5px] font-medium hover:bg-accent-hover transition-colors whitespace-nowrap"
                 >
                   Ücretsiz Başla
                 </Link>
@@ -503,7 +508,7 @@ export function LandingPage() {
 
       {/* Hero Section */}
       <section className="cloud-grid border-b border-hairline">
-        <div className="max-w-6xl mx-auto px-6 py-14 sm:py-20 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-soft border border-accent/20">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -512,33 +517,48 @@ export function LandingPage() {
               </span>
             </div>
 
-            <h1 className="text-[38px] sm:text-[50px] leading-[1.08] font-bold tracking-[-0.03em] text-ink">
+            <h1 className="text-[34px] sm:text-[50px] leading-[1.08] font-bold tracking-[-0.03em] text-ink">
               Mülk yönetiminde{' '}
               <span className="text-accent">yeni dönem.</span>
             </h1>
 
-            <p className="text-[15.5px] sm:text-[16.5px] leading-[1.65] text-ink-muted max-w-lg">
+            <p className="text-[15px] sm:text-[16.5px] leading-[1.65] text-ink-muted max-w-lg">
               Tüm dairelerinizi, iş yerlerinizi, aylık kira tahsilatlarınızı ve mülk
               bazlı kazanç geçmişinizi Android uygulamanızla birebir uyumlu web
               panelinden yönetin.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
               <Link
                 to={isAuthenticated ? '/panel' : '/kayit'}
-                className="px-6 py-3 rounded-xl bg-accent text-white text-[14.5px] font-semibold hover:bg-accent-hover shadow-[0_8px_20px_-10px_rgba(29,161,242,0.8)] transition-all"
+                className="w-full sm:w-auto text-center px-5 sm:px-6 py-3 rounded-xl bg-accent text-white text-[14.5px] font-semibold hover:bg-accent-hover shadow-[0_8px_20px_-10px_rgba(29,161,242,0.8)] transition-all"
               >
                 {isAuthenticated ? 'Panele Devam Et →' : 'Ücretsiz Hesap Oluştur →'}
               </Link>
               <Link
                 to="/giris"
-                className="px-6 py-3 rounded-xl border border-hairline bg-paper text-ink text-[14.5px] font-medium hover:border-accent/50 transition-colors"
+                className="flex-1 sm:flex-none text-center px-5 py-3 rounded-xl border border-hairline bg-paper text-ink text-[14.5px] font-medium hover:border-accent/50 transition-colors"
               >
                 Giriş Yap
               </Link>
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-hairline bg-paper text-ink text-[13.5px] font-medium hover:border-accent/50 transition-colors whitespace-nowrap"
+              >
+                <img
+                  src="/app-logo.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="w-5 h-5 rounded-md object-cover shrink-0"
+                />
+                <span>Google Play</span>
+              </a>
             </div>
 
-            <div className="pt-4 border-t border-hairline grid grid-cols-3 gap-4 max-w-md">
+            <div className="pt-4 border-t border-hairline grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-md">
               <div>
                 <div className="text-[11px] uppercase tracking-[0.08em] text-ink-subtle font-medium">
                   Mülk Tipi
@@ -555,13 +575,18 @@ export function LandingPage() {
                   PDF Makbuz & Kontrat
                 </div>
               </div>
-              <div>
+              <div className="col-span-2 sm:col-span-1">
                 <div className="text-[11px] uppercase tracking-[0.08em] text-ink-subtle font-medium">
                   Platform
                 </div>
-                <div className="mt-1 text-[13.5px] font-semibold text-ink">
-                  Android & Web
-                </div>
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block text-[13.5px] font-semibold text-accent hover:underline"
+                >
+                  Android & Web ↗
+                </a>
               </div>
             </div>
           </div>
@@ -654,28 +679,28 @@ export function LandingPage() {
                             {t.isBusiness ? 'İşyeri' : 'Konut'}
                           </span>
                         </div>
-                        <div className="border-t border-divider px-4 py-2.5 grid grid-cols-3 items-center gap-2">
-                          <div>
+                        <div className="border-t border-divider px-3 sm:px-4 py-2.5 grid grid-cols-3 items-center gap-1.5 sm:gap-2">
+                          <div className="min-w-0">
                             <div className="text-[10px] text-ink-subtle">Aylık Kira</div>
                             <div
-                              className={`font-mono text-[13px] font-semibold text-ink tabular-nums ${blurStyle}`}
+                              className={`font-mono text-[12px] sm:text-[13px] font-semibold text-ink tabular-nums truncate ${blurStyle}`}
                             >
                               {formatCurrency(t.rent)}
                             </div>
                           </div>
-                          <div className="border-x border-divider px-3 flex items-center justify-between">
+                          <div className="border-x border-divider px-2 sm:px-3 flex items-center justify-between gap-1">
                             <div>
                               <div className="text-[10px] text-ink-subtle">Ödeme</div>
-                              <div className="font-mono text-[13px] font-semibold text-ink tabular-nums">
+                              <div className="font-mono text-[12px] sm:text-[13px] font-semibold text-ink tabular-nums">
                                 {t.paid}/{t.total}
                               </div>
                             </div>
                             <MiniProgressRing percent={pct} color={ringColor} />
                           </div>
-                          <div className="pl-2">
+                          <div className="pl-1.5 sm:pl-2 min-w-0">
                             <div className="text-[10px] text-ink-subtle">Durum</div>
                             <div
-                              className="text-[12px] font-semibold"
+                              className="text-[11.5px] sm:text-[12px] font-semibold truncate"
                               style={{ color: isAllPaid ? '#00BA7C' : 'var(--text-primary)' }}
                             >
                               {isAllPaid ? 'Tamamlandı' : 'Aktif'}
@@ -820,13 +845,13 @@ export function LandingPage() {
       </section>
 
       {/* Dedicated Modern Interactive "Akıllı Kat & Mülk Planı" Section (Mirrors Mobile PropertyManagementScreen) */}
-      <section id="kat-plani" className="max-w-6xl mx-auto px-6 py-18 sm:py-22 space-y-8">
+      <section id="kat-plani" className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-22 space-y-7 sm:space-y-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-accent">
               Akıllı Kat & Mülk Planı
             </p>
-            <h2 className="mt-2 text-[30px] sm:text-[38px] leading-[1.12] font-bold tracking-[-0.025em] text-ink">
+            <h2 className="mt-2 text-[26px] sm:text-[38px] leading-[1.14] font-bold tracking-[-0.025em] text-ink">
               Binalarınızı kat kat görün, her daireye tek dokunuşla ulaşın.
             </h2>
             <p className="mt-2.5 text-[14.5px] leading-[1.6] text-ink-muted">
@@ -837,24 +862,24 @@ export function LandingPage() {
           </div>
 
           {/* Mobile-Matched PropertyStatHeader Mini Bar */}
-          <div className="grid grid-cols-3 gap-2.5 shrink-0">
-            <div className="px-4 py-3 rounded-2xl bg-paper border border-accent/25">
-              <div className="font-mono text-[19px] font-bold text-ink tabular-nums">
+          <div className="grid grid-cols-3 gap-2 sm:gap-2.5 shrink-0">
+            <div className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl bg-paper border border-accent/25">
+              <div className="font-mono text-[17px] sm:text-[19px] font-bold text-ink tabular-nums">
                 {portfolioStats.properties}
               </div>
-              <div className="text-[11px] font-medium text-ink-muted">Mülk / Bina</div>
+              <div className="text-[10.5px] sm:text-[11px] font-medium text-ink-muted">Mülk / Bina</div>
             </div>
-            <div className="px-4 py-3 rounded-2xl bg-paper border border-paid/30">
-              <div className="font-mono text-[19px] font-bold text-paid tabular-nums">
+            <div className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl bg-paper border border-paid/30">
+              <div className="font-mono text-[17px] sm:text-[19px] font-bold text-paid tabular-nums">
                 {portfolioStats.occupied}
               </div>
-              <div className="text-[11px] font-medium text-ink-muted">Dolu Daire</div>
+              <div className="text-[10.5px] sm:text-[11px] font-medium text-ink-muted">Dolu Daire</div>
             </div>
-            <div className="px-4 py-3 rounded-2xl bg-paper border border-warn/35">
-              <div className="font-mono text-[19px] font-bold text-warn tabular-nums">
+            <div className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl bg-paper border border-warn/35">
+              <div className="font-mono text-[17px] sm:text-[19px] font-bold text-warn tabular-nums">
                 {portfolioStats.vacant}
               </div>
-              <div className="text-[11px] font-medium text-ink-muted">Boş Daire</div>
+              <div className="text-[10.5px] sm:text-[11px] font-medium text-ink-muted">Boş Daire</div>
             </div>
           </div>
         </div>
@@ -1341,87 +1366,174 @@ export function LandingPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="dark-panel-grid rounded-2xl px-8 py-12 sm:px-12 sm:py-14 border border-[#2A2D37] flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
+        <div className="dark-panel-grid rounded-2xl px-6 py-10 sm:px-12 sm:py-14 border border-[#2A2D37] flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div className="max-w-xl">
             <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-[#1DA1F2]">
               Hemen Başlayın
             </p>
-            <h2 className="mt-2.5 text-[28px] sm:text-[34px] leading-[1.15] font-bold tracking-[-0.025em] text-[#E8E8E8]">
-              Mevcut Kira Takip hesabınızla webde devam edin.
+            <h2 className="mt-2.5 text-[25px] sm:text-[34px] leading-[1.15] font-bold tracking-[-0.025em] text-[#E8E8E8]">
+              Mevcut Kira Takip hesabınızla Android ve webde devam edin.
             </h2>
+            <p className="mt-3 text-[13.5px] text-[#8B8D97]">
+              Sorularınız ve destek talepleriniz için{' '}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-[#7FCBF9] hover:underline font-medium"
+              >
+                {CONTACT_EMAIL}
+              </a>{' '}
+              adresinden bize ulaşabilirsiniz.
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               to="/giris"
-              className="px-6 py-3 rounded-xl bg-accent text-white text-[14px] font-semibold hover:bg-accent-hover transition-colors"
+              className="px-5 sm:px-6 py-3 rounded-xl bg-accent text-white text-[14px] font-semibold hover:bg-accent-hover transition-colors"
             >
               Giriş Yap →
             </Link>
             <Link
               to="/kayit"
-              className="px-6 py-3 rounded-xl border border-[#33363F] text-[#E8E8E8] text-[14px] font-medium hover:border-white/40 transition-colors"
+              className="px-5 sm:px-6 py-3 rounded-xl border border-[#33363F] text-[#E8E8E8] text-[14px] font-medium hover:border-white/40 transition-colors"
             >
               Hesap Oluştur
             </Link>
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1A1D27] border border-[#33363F] text-[#E8E8E8] text-[13.5px] font-medium hover:border-[#1DA1F2]/60 transition-colors"
+            >
+              <img
+                src="/app-logo.png"
+                alt=""
+                width={20}
+                height={20}
+                className="w-5 h-5 rounded-md object-cover shrink-0"
+              />
+              <span>Google Play'de İndir</span>
+            </a>
           </div>
         </div>
       </section>
 
       <footer className="border-t border-hairline bg-paper">
-        <div className="max-w-6xl mx-auto px-6 py-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-ink-subtle">
-          <BrandMark />
-          <div className="flex items-center gap-6">
-            <Link to="/giris" className="hover:text-ink transition-colors">
-              Giriş
-            </Link>
-            <Link to="/kayit" className="hover:text-ink transition-colors">
-              Kayıt Ol
-            </Link>
-            <Link to="/sifremi-unuttum" className="hover:text-ink transition-colors">
-              Şifremi Unuttum
-            </Link>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-5 space-y-4">
+              <BrandMark />
+              <p className="text-[13.5px] leading-relaxed text-ink-muted max-w-sm">
+                Ev sahipleri ve kiracılar için Android ve Web üzerinde kat bazlı mülk,
+                kira takvimi, makbuz ve geçmiş kazanç yönetimi.
+              </p>
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl border border-hairline bg-canvas hover:border-accent/50 transition-colors"
+              >
+                <img
+                  src="/app-logo.png"
+                  alt="Kira Net Google Play Logo"
+                  width={28}
+                  height={28}
+                  className="w-7 h-7 rounded-lg object-cover shrink-0"
+                />
+                <div className="text-left leading-tight">
+                  <div className="text-[10.5px] text-ink-subtle uppercase tracking-[0.06em]">
+                    Google Play
+                  </div>
+                  <div className="text-[13px] font-semibold text-ink">
+                    Android Uygulamasını İndir ↗
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div className="md:col-span-3 space-y-3">
+              <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-ink-subtle">
+                Platform
+              </h3>
+              <ul className="space-y-2 text-[13.5px] text-ink-muted">
+                <li>
+                  <a href="#kat-plani" className="hover:text-ink transition-colors">
+                    Kat & Mülk Planı
+                  </a>
+                </li>
+                <li>
+                  <a href="#ozellikler" className="hover:text-ink transition-colors">
+                    Özellikler
+                  </a>
+                </li>
+                <li>
+                  <a href="#hesaplayici" className="hover:text-ink transition-colors">
+                    Kira Hesaplayıcı
+                  </a>
+                </li>
+                <li>
+                  <Link to="/giris" className="hover:text-ink transition-colors">
+                    Giriş Yap
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/kayit" className="hover:text-ink transition-colors">
+                    Hesap Oluştur
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="md:col-span-4 space-y-3">
+              <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-ink-subtle">
+                İletişim & Destek
+              </h3>
+              <ul className="space-y-2.5 text-[13.5px] text-ink-muted">
+                <li>
+                  <div className="text-[11px] text-ink-subtle">Destek E-postası</div>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="font-mono text-[13px] font-medium text-accent hover:underline break-all"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
+                </li>
+                <li>
+                  <div className="text-[11px] text-ink-subtle">Mobil Uygulama</div>
+                  <a
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[13px] font-medium text-ink hover:text-accent transition-colors"
+                  >
+                    Google Play · Kira Net (Android) ↗
+                  </a>
+                </li>
+                <li className="pt-1">
+                  <button
+                    type="button"
+                    onClick={toggleTheme}
+                    className="px-3 py-1.5 rounded-lg border border-hairline bg-canvas text-[12px] font-medium text-ink-muted hover:text-ink transition-colors cursor-pointer"
+                  >
+                    {theme === 'light' ? 'Koyu Temaya Geç' : 'Açık Temaya Geç'}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
-          <span>© {new Date().getFullYear()} Kira Takip · Android & Web</span>
+
+          <div className="pt-6 border-t border-divider flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-ink-subtle">
+            <span>© {new Date().getFullYear()} Kira Takip · FatalSoft</span>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link to="/sifremi-unuttum" className="hover:text-ink transition-colors">
+                Şifremi Unuttum
+              </Link>
+              <span>·</span>
+              <span>Android & Web</span>
+            </div>
+          </div>
         </div>
       </footer>
-    </div>
-  );
-}
-
-function MiniProgressRing({ percent, color }: { percent: number; color: string }) {
-  const radius = 17.5;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percent / 100) * circumference;
-  return (
-    <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
-      <svg className="w-11 h-11 -rotate-90" viewBox="0 0 44 44">
-        <circle
-          cx="22"
-          cy="22"
-          r={radius}
-          fill="none"
-          stroke="var(--border-color)"
-          strokeWidth="3"
-        />
-        <circle
-          cx="22"
-          cy="22"
-          r={radius}
-          fill="none"
-          stroke={color}
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-        />
-      </svg>
-      <span
-        className="absolute text-[9.5px] font-mono font-bold tracking-tight"
-        style={{ color }}
-      >
-        %{percent}
-      </span>
     </div>
   );
 }

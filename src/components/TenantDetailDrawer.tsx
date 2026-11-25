@@ -112,7 +112,7 @@ export function TenantDetailDrawer({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-divider flex items-start justify-between gap-3">
+        <div className="px-4 sm:px-6 py-4 border-b border-divider flex items-start justify-between gap-3">
           <div className="min-w-0">
             <span
               className={`inline-block text-[11px] font-semibold px-2 py-0.5 rounded-md ${
@@ -141,7 +141,7 @@ export function TenantDetailDrawer({
         </div>
 
         {/* Action Strip */}
-        <div className="px-6 py-2.5 border-b border-divider bg-canvas/60 flex flex-wrap items-center gap-2">
+        <div className="px-4 sm:px-6 py-2.5 border-b border-divider bg-canvas/60 flex flex-wrap items-center gap-2">
           {!tenant.isArchived && (
             <>
               <button
@@ -215,7 +215,7 @@ export function TenantDetailDrawer({
         )}
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-4">
           {/* Mobile-Matched Contract Completed Banner */}
           {isAllPaid && (
             <div className="p-4 rounded-2xl bg-paid-soft border border-paid/35 space-y-3">

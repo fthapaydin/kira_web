@@ -8,34 +8,15 @@ interface BrandMarkProps {
 export function BrandMark({ inverted = false, to = '/' }: BrandMarkProps) {
   const content = (
     <span className="inline-flex items-center gap-2.5 select-none">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden="true"
-        className="shrink-0"
-      >
-        <rect width="24" height="24" rx="7" fill="#1DA1F2" />
-        <path
-          d="M7 16V10.2L12 6.8L17 10.2V16"
-          stroke="#FFFFFF"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <line
-          x1="10"
-          y1="13.5"
-          x2="14"
-          y2="13.5"
-          stroke="#FFFFFF"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
+      <img
+        src="/app-logo.png"
+        alt="Kira Takip Logo"
+        width={28}
+        height={28}
+        className="w-7 h-7 rounded-lg object-cover shrink-0 shadow-[0_3px_12px_-4px_rgba(29,161,242,0.55)] ring-1 ring-white/15"
+      />
       <span
-        className={`text-[16px] font-bold tracking-[-0.02em] ${
+        className={`text-[16px] font-bold tracking-[-0.02em] whitespace-nowrap ${
           inverted ? 'text-[#E8E8E8]' : 'text-ink'
         }`}
       >

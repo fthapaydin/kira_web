@@ -225,7 +225,7 @@ export function TenantFormModal({
         className="w-full max-w-lg max-h-[92vh] overflow-y-auto bg-paper border border-hairline rounded-2xl shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-6 py-4 border-b border-divider flex items-center justify-between sticky top-0 bg-paper z-10">
+        <div className="px-4 sm:px-6 py-4 border-b border-divider flex items-center justify-between sticky top-0 bg-paper z-10">
           <h2 className="text-[17px] font-bold text-ink">{title}</h2>
           <button
             type="button"
@@ -236,7 +236,7 @@ export function TenantFormModal({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {isRenewal && (
             <div className="p-3.5 rounded-xl bg-accent-soft border border-accent/25 text-[12.5px] text-ink">
               <div className="font-semibold text-accent">
@@ -321,7 +321,7 @@ export function TenantFormModal({
           </div>
 
           {/* Name & Surname */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-[12px] font-medium text-ink-muted mb-1.5">
                 Ad
@@ -364,7 +364,7 @@ export function TenantFormModal({
           </div>
 
           {/* Contract Financials */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-[12px] font-medium text-ink-muted mb-1.5">
                 Aylık Kira (₺)
@@ -394,7 +394,7 @@ export function TenantFormModal({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-[12px] font-medium text-ink-muted mb-1.5">
                 Sözleşme Süresi (Ay)

@@ -107,7 +107,7 @@ export function SettingsPanel({ onNotify }: SettingsPanelProps) {
     <div className="space-y-6">
       {/* 1. Privacy & Amount Blurring */}
       <section className="rounded-2xl bg-paper border border-hairline shadow-[0_6px_24px_-16px_rgba(19,22,29,0.14)] overflow-hidden">
-        <div className="px-6 py-5 border-b border-divider flex flex-wrap items-center justify-between gap-4">
+        <div className="px-4 sm:px-6 py-5 border-b border-divider flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-accent">
               Gizlilik Modu
@@ -327,7 +327,7 @@ export function SettingsPanel({ onNotify }: SettingsPanelProps) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-[12.5px] font-medium text-ink-muted mb-1.5">
                 Varsayılan Artış Oranı (%)
@@ -401,7 +401,7 @@ export function SettingsPanel({ onNotify }: SettingsPanelProps) {
               placeholder="Mevcut şifre"
               className="w-full px-3.5 py-2.5 rounded-xl bg-canvas border border-hairline text-[13.5px] text-ink focus:outline-none focus:border-accent"
             />
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <input
                 type="password"
                 value={newPassword}

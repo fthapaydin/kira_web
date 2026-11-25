@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BrandMark } from '../components/BrandMark';
+import { MiniProgressRing } from '../components/MiniProgressRing';
 import { Money } from '../components/Money';
 import { ApartmentFormModal, PropertyFormModal } from '../components/PropertyModals';
 import { SettingsPanel } from '../components/SettingsPanel';
@@ -409,11 +410,27 @@ export function DashboardPage() {
       {/* Sidebar */}
       <aside className="lg:w-64 lg:shrink-0 bg-paper border-b lg:border-b-0 lg:border-r border-hairline flex flex-col justify-between">
         <div>
-          <div className="h-16 px-6 flex items-center justify-between border-b border-divider">
+          <div className="h-16 px-4 sm:px-6 flex items-center justify-between gap-2 border-b border-divider">
             <BrandMark to="/panel" />
+            <div className="flex lg:hidden items-center gap-1.5">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="px-2.5 py-1.5 rounded-lg border border-hairline bg-canvas text-[11.5px] font-medium text-ink-muted hover:text-ink transition-colors cursor-pointer"
+              >
+                {theme === 'light' ? 'Koyu' : 'Açık'}
+              </button>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="px-2.5 py-1.5 rounded-lg border border-hairline text-[11.5px] font-medium text-ink-muted hover:text-danger hover:border-danger/40 transition-colors cursor-pointer"
+              >
+                Çıkış
+              </button>
+            </div>
           </div>
 
-          <nav className="p-3 flex lg:flex-col gap-1 overflow-x-auto">
+          <nav className="p-3 flex lg:flex-col gap-1 overflow-x-auto no-scrollbar">
             {NAV_ITEMS.map((item) => {
               const active = section === item.key;
               const badgeCount =
@@ -490,9 +507,9 @@ export function DashboardPage() {
 
       {/* Main Workspace */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="h-16 px-5 sm:px-8 border-b border-hairline bg-paper/90 backdrop-blur-md sticky top-0 z-20 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <h1 className="text-[18px] font-bold tracking-[-0.02em] text-ink truncate">
+        <header className="min-h-16 py-2.5 sm:py-0 px-4 sm:px-8 border-b border-hairline bg-paper/90 backdrop-blur-md sticky top-0 z-20 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <h1 className="text-[17px] sm:text-[18px] font-bold tracking-[-0.02em] text-ink truncate">
               {NAV_ITEMS.find((n) => n.key === section)?.label}
             </h1>
             {overdueCount > 0 && section === 'overview' && (
@@ -503,13 +520,13 @@ export function DashboardPage() {
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Global Privacy Blur Quick Toggle */}
             <button
               type="button"
               onClick={toggleHideAmounts}
               title="Tutarları bulanıklaştır / göster (Kısayol: Shift + H)"
-              className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-[12.5px] font-medium transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl border text-[12px] sm:text-[12.5px] font-medium transition-all cursor-pointer ${
                 prefs.hideAmounts
                   ? 'border-accent/40 bg-accent-soft text-accent font-semibold'
                   : 'border-hairline bg-canvas text-ink-muted hover:text-ink hover:border-accent/40'
@@ -520,14 +537,19 @@ export function DashboardPage() {
                   prefs.hideAmounts ? 'bg-accent' : 'bg-ink-subtle'
                 }`}
               />
-              <span>{prefs.hideAmounts ? 'Gizlilik Açık' : 'Tutarları Gizle'}</span>
+              <span className="hidden sm:inline">
+                {prefs.hideAmounts ? 'Gizlilik Açık' : 'Tutarları Gizle'}
+              </span>
+              <span className="sm:hidden">
+                {prefs.hideAmounts ? 'Gizli' : 'Gizle'}
+              </span>
             </button>
 
             {section === 'properties' ? (
               <button
                 type="button"
                 onClick={() => setPropertyModal({ open: true, editing: null })}
-                className="px-3.5 py-2 rounded-xl bg-accent text-white text-[13px] font-semibold hover:bg-accent-hover shadow-[0_6px_16px_-8px_rgba(29,161,242,0.75)] transition-all cursor-pointer"
+                className="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-accent text-white text-[12.5px] sm:text-[13px] font-semibold hover:bg-accent-hover shadow-[0_6px_16px_-8px_rgba(29,161,242,0.75)] transition-all cursor-pointer whitespace-nowrap"
               >
                 + Yeni Mülk
               </button>
@@ -535,7 +557,7 @@ export function DashboardPage() {
               <button
                 type="button"
                 onClick={() => setTenantModal({ mode: 'create' })}
-                className="px-3.5 py-2 rounded-xl bg-accent text-white text-[13px] font-semibold hover:bg-accent-hover shadow-[0_6px_16px_-8px_rgba(29,161,242,0.75)] transition-all cursor-pointer"
+                className="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-accent text-white text-[12.5px] sm:text-[13px] font-semibold hover:bg-accent-hover shadow-[0_6px_16px_-8px_rgba(29,161,242,0.75)] transition-all cursor-pointer whitespace-nowrap"
               >
                 + Yeni Kiracı
               </button>
@@ -552,7 +574,7 @@ export function DashboardPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-5 sm:p-8 max-w-6xl w-full mx-auto space-y-6">
+        <main className="flex-1 p-4 sm:p-8 max-w-6xl w-full mx-auto space-y-6">
           {toast && (
             <div className="px-4 py-3 rounded-xl bg-paper border border-accent/40 shadow-md text-[13.5px] text-ink flex items-center justify-between">
               <div className="flex items-center gap-2.5">
@@ -595,7 +617,7 @@ export function DashboardPage() {
                   {/* Top Featured Portfolio Row */}
                   <div className="grid lg:grid-cols-12 gap-5 items-stretch">
                     {/* Featured Deep Financial Hero Card */}
-                    <div className="lg:col-span-7 relative overflow-hidden rounded-2xl p-6 sm:p-7 bg-gradient-to-br from-[#131823] via-[#172133] to-[#111927] text-[#E8E8E8] border border-[#273247] shadow-[0_18px_44px_-22px_rgba(19,22,29,0.55)] flex flex-col justify-between gap-6">
+                    <div className="lg:col-span-7 relative overflow-hidden rounded-2xl p-5 sm:p-7 bg-gradient-to-br from-[#131823] via-[#172133] to-[#111927] text-[#E8E8E8] border border-[#273247] shadow-[0_18px_44px_-22px_rgba(19,22,29,0.55)] flex flex-col justify-between gap-6">
                       {/* Ambient subtle brand glow */}
                       <div
                         aria-hidden="true"
@@ -611,13 +633,13 @@ export function DashboardPage() {
                           <p className="text-[11.5px] font-semibold uppercase tracking-[0.14em] text-[#7FCBF9]">
                             Toplam Portföy Tahsilatı
                           </p>
-                          <div className="mt-2 font-mono text-[32px] sm:text-[38px] font-bold tracking-[-0.03em] text-white leading-none">
+                          <div className="mt-2 font-mono text-[28px] sm:text-[38px] font-bold tracking-[-0.03em] text-white leading-none">
                             <Money amount={displayTotalPaid} />
                           </div>
                         </div>
 
-                        <div className="flex flex-col items-end gap-1.5">
-                          <span className="px-3 py-1 rounded-full bg-[#00BA7C]/18 border border-[#00BA7C]/35 text-[#34D399] font-mono text-[12px] font-semibold">
+                        <div className="flex flex-col sm:items-end gap-1.5">
+                          <span className="px-3 py-1 rounded-full bg-[#00BA7C]/18 border border-[#00BA7C]/35 text-[#34D399] font-mono text-[12px] font-semibold w-fit">
                             %{overallCollectionPct} Tahsilat
                           </span>
                           <span className="text-[11.5px] text-white/50">
@@ -634,7 +656,7 @@ export function DashboardPage() {
                             style={{ width: `${overallCollectionPct}%` }}
                           />
                         </div>
-                        <div className="flex items-center justify-between text-[11.5px] text-white/55 font-mono">
+                        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[11.5px] text-white/55 font-mono">
                           <span>
                             Tahsil Edilen: <Money amount={displayTotalPaid} className="text-white/85" />
                           </span>
@@ -645,23 +667,23 @@ export function DashboardPage() {
                       </div>
 
                       {/* Bottom 3-Metric Strip */}
-                      <div className="relative pt-4 border-t border-white/10 grid grid-cols-3 gap-3">
+                      <div className="relative pt-4 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-3">
                         <div>
                           <p className="text-[11px] text-white/55">Aylık Potansiyel</p>
-                          <p className="mt-1 font-mono text-[16px] sm:text-[18px] font-bold text-[#7FCBF9]">
+                          <p className="mt-1 font-mono text-[15.5px] sm:text-[18px] font-bold text-[#7FCBF9]">
                             <Money amount={displayMonthlyPotential} />
                           </p>
                         </div>
-                        <div className="border-x border-white/10 px-3">
+                        <div className="sm:border-x sm:border-white/10 sm:px-3">
                           <p className="text-[11px] text-white/55">Yıllık Öngörü</p>
-                          <p className="mt-1 font-mono text-[16px] sm:text-[18px] font-bold text-white">
+                          <p className="mt-1 font-mono text-[15.5px] sm:text-[18px] font-bold text-white">
                             <Money amount={displayAnnualProjected} />
                           </p>
                         </div>
-                        <div className="pl-1">
+                        <div className="col-span-2 sm:col-span-1 sm:pl-1">
                           <p className="text-[11px] text-white/55">Bekleyen Bakiye</p>
                           <p
-                            className={`mt-1 font-mono text-[16px] sm:text-[18px] font-bold ${
+                            className={`mt-1 font-mono text-[15.5px] sm:text-[18px] font-bold ${
                               displayOutstanding > 0 ? 'text-[#FBBF24]' : 'text-[#34D399]'
                             }`}
                           >
@@ -1024,7 +1046,7 @@ export function DashboardPage() {
                       <span className="text-[12px] font-bold uppercase tracking-[0.1em] text-ink-subtle">
                         Mülkler / Binalar
                       </span>
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                         <div className="inline-flex p-1 rounded-xl bg-paper border border-hairline">
                           {(
                             [
@@ -1037,7 +1059,7 @@ export function DashboardPage() {
                               key={key}
                               type="button"
                               onClick={() => setPropertyUnitStatus(key)}
-                              className={`px-2.5 py-1 rounded-lg text-[12px] font-semibold transition-colors cursor-pointer ${
+                              className={`px-2.5 py-1 rounded-lg text-[12px] font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                                 propertyUnitStatus === key
                                   ? key === 'occupied'
                                     ? 'bg-paid text-white'
@@ -1056,7 +1078,7 @@ export function DashboardPage() {
                           value={propertySearch}
                           onChange={(e) => setPropertySearch(e.target.value)}
                           placeholder="Daire, kat veya kiracı ara..."
-                          className="w-56 px-3 py-1.5 rounded-xl bg-paper border border-hairline text-[13px] text-ink placeholder:text-ink-subtle focus:outline-none focus:border-accent"
+                          className="w-full sm:w-56 px-3 py-1.5 rounded-xl bg-paper border border-hairline text-[13px] text-ink placeholder:text-ink-subtle focus:outline-none focus:border-accent"
                         />
                       </div>
                     </div>
@@ -1105,8 +1127,8 @@ export function DashboardPage() {
                   {selectedProperty && (
                     <div className="grid lg:grid-cols-12 gap-6 items-start">
                       {/* Modern Akıllı Kat Planı (FloorBlueprintGrid) */}
-                      <div className="lg:col-span-6 bg-paper border border-hairline rounded-2xl shadow-[0_12px_32px_-22px_rgba(19,22,29,0.18)] p-5 sm:p-6 space-y-5">
-                        <div className="flex items-start justify-between gap-3 pb-4 border-b border-divider">
+                      <div className="lg:col-span-6 bg-paper border border-hairline rounded-2xl shadow-[0_12px_32px_-22px_rgba(19,22,29,0.18)] p-4 sm:p-6 space-y-5">
+                        <div className="flex flex-wrap items-start justify-between gap-3 pb-4 border-b border-divider">
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
                               <h2 className="text-[17px] font-bold text-ink truncate">
@@ -1612,26 +1634,26 @@ function MobileStyleTenantCard({
         </span>
       </div>
 
-      <div className={`border-t border-divider ${compact ? 'px-4 py-2' : 'px-4 py-3'} grid grid-cols-3 items-center gap-2`}>
-        <div>
-          <div className="text-[10.5px] text-ink-subtle">Aylık Kira</div>
-          <div className="font-mono text-[13.5px] font-semibold text-ink mt-0.5">
+      <div className={`border-t border-divider ${compact ? 'px-3 sm:px-4 py-2' : 'px-3 sm:px-4 py-3'} grid grid-cols-3 items-center gap-1.5 sm:gap-2`}>
+        <div className="min-w-0">
+          <div className="text-[10px] sm:text-[10.5px] text-ink-subtle">Aylık Kira</div>
+          <div className="font-mono text-[12.5px] sm:text-[13.5px] font-semibold text-ink mt-0.5 truncate">
             <Money amount={tenant.rentAmount} />
           </div>
         </div>
-        <div className="border-x border-divider px-3 flex items-center justify-between gap-1">
+        <div className="border-x border-divider px-2 sm:px-3 flex items-center justify-between gap-1">
           <div>
-            <div className="text-[10.5px] text-ink-subtle">Ödeme</div>
-            <div className="font-mono text-[13.5px] font-semibold text-ink tabular-nums mt-0.5">
+            <div className="text-[10px] sm:text-[10.5px] text-ink-subtle">Ödeme</div>
+            <div className="font-mono text-[12.5px] sm:text-[13.5px] font-semibold text-ink tabular-nums mt-0.5">
               {stats.paid}/{stats.total}
             </div>
           </div>
           <MiniProgressRing percent={percent} color={ringColor} />
         </div>
-        <div className="pl-2">
-          <div className="text-[10.5px] text-ink-subtle">Durum</div>
+        <div className="pl-1.5 sm:pl-2 min-w-0">
+          <div className="text-[10px] sm:text-[10.5px] text-ink-subtle">Durum</div>
           <div
-            className="text-[12.5px] font-semibold mt-0.5 truncate"
+            className="text-[11.5px] sm:text-[12.5px] font-semibold mt-0.5 truncate"
             style={{
               color: tenant.isArchived
                 ? 'var(--text-subtle)'
@@ -1645,43 +1667,6 @@ function MobileStyleTenantCard({
         </div>
       </div>
     </button>
-  );
-}
-
-function MiniProgressRing({ percent, color }: { percent: number; color: string }) {
-  const radius = 17.5;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percent / 100) * circumference;
-  return (
-    <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
-      <svg className="w-11 h-11 -rotate-90" viewBox="0 0 44 44">
-        <circle
-          cx="22"
-          cy="22"
-          r={radius}
-          fill="none"
-          stroke="var(--border-color)"
-          strokeWidth="3"
-        />
-        <circle
-          cx="22"
-          cy="22"
-          r={radius}
-          fill="none"
-          stroke={color}
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-        />
-      </svg>
-      <span
-        className="absolute text-[9.5px] font-mono font-bold tracking-tight"
-        style={{ color }}
-      >
-        %{percent}
-      </span>
-    </div>
   );
 }
 

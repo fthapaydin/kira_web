@@ -118,7 +118,7 @@ export function RegisterPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label htmlFor="reg-name" className="block text-[12.5px] font-medium text-ink mb-1.5">
               Ad
@@ -179,7 +179,7 @@ export function RegisterPage() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label htmlFor="reg-pass" className="block text-[12.5px] font-medium text-ink mb-1.5">
               Şifre
